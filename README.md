@@ -22,6 +22,14 @@ portfolio-site
 
 └── README.md # This file!
 
+Portfolio/
+├── index.html
+├── style.css
+├── README.md
+└── assets/
+    └── images/ (optional, for later use like profile pic, background, icons, etc.)
+
+
 ---
 
 ## Features
