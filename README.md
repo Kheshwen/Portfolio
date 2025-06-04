@@ -22,6 +22,8 @@ Built with 💜 using basic HTML and CSS, wrapped in a **Cyberpunk aesthetic**.
 
 └── README.md # This file!
 
+---
+
 ## Features
 
 - Futuristic Cyberpunk design
@@ -29,3 +31,33 @@ Built with 💜 using basic HTML and CSS, wrapped in a **Cyberpunk aesthetic**.
 - Contact links to LinkedIn, GitHub, Instagram, Gmail & Phone
 - Clean and responsive layout using only HTML + CSS
 - Ready to grow: Projects, Skills, and Multi-language support coming soon!
+
+---
+
+## Roadmap
+- Add Projects section
+- Add Skills section
+- Make it responsive for mobile
+- Deploy to GitHub Pages or Netlify
+- Connect to kheshwenda.me domain
+- Japanese, Mandarin language toggle support
+
+---
+
+## Acknowledgements
+- Font: Orbitron by Google Fonts
+- Inspired by the neon worlds of Cyberpunk 2077 and synthwave vibes.
+
+---
+
+## AOB
+“The future belongs to those who code it.” — Kheshwenda
+
+
+
+
+
+
+
+
+
