@@ -1,68 +1,67 @@
+/* style.css */
+
 body {
   margin: 0;
   font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
-  color: #e0f7ff;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #eee;
   line-height: 1.6;
-  padding: 20px;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
-  padding: 20px;
-  background: rgba(30, 30, 30, 0.7);
-  box-shadow: 0 0 20px #00ffff88;
-  border-radius: 10px;
+  padding: 40px;
 }
 
 header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 h1 {
   font-size: 3rem;
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
 }
 
 .tagline {
   font-size: 1.2rem;
-  color: #00ffff;
-  text-shadow: 0 0 5px #00ffff;
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
 }
 
 section {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-left: 5px solid #0ff;
+  box-shadow: 0 0 10px #0ff;
+  border-radius: 10px;
 }
 
 h2 {
-  color: #00ff99;
-  text-shadow: 0 0 8px #00ff99;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
+  color: #ff00ff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 8px #ff00ff;
 }
 
 a {
-  color: #00ffff;
+  color: #0ff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 a:hover {
   color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
 }
 
 footer {
   text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #0ff;
   font-size: 0.9rem;
-  color: #666;
+  color: #999;
 }
