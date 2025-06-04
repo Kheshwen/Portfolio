@@ -15,11 +15,11 @@ Built with 💜 using basic HTML and CSS, wrapped in a **Cyberpunk aesthetic**.
 /portfolio-site/
 
 │
-
+|
 ├── index.html # Main HTML file
-
+|
 ├── style.css # Cyberpunk themed styles
-
+|
 └── README.md # This file!
 
 ---
