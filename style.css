@@ -1,67 +1,83 @@
-/* style.css */
+/* Cyberpunk Theme CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+:root {
+  --bg-color: #0f0f1a;
+  --primary-color: #00ffe7;
+  --secondary-color: #ff00c8;
+  --text-color: #e0e0e0;
+  --accent-color: #ffae00;
+}
 
 body {
   margin: 0;
   font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: #eee;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
 .container {
+  width: 90%;
   max-width: 1000px;
-  margin: auto;
-  padding: 40px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 header {
   text-align: center;
-  margin-bottom: 50px;
+  padding: 2rem 0;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 h1 {
   font-size: 3rem;
-  color: #0ff;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--primary-color);
 }
 
 .tagline {
   font-size: 1.2rem;
-  color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff;
+  color: var(--secondary-color);
+  text-shadow: 0 0 6px var(--secondary-color);
 }
 
 section {
-  margin-bottom: 60px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-left: 5px solid #0ff;
-  box-shadow: 0 0 10px #0ff;
-  border-radius: 10px;
+  margin: 3rem 0;
 }
 
 h2 {
-  color: #ff00ff;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-shadow: 0 0 8px #ff00ff;
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 a {
-  color: #0ff;
+  color: var(--primary-color);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 a:hover {
-  color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff;
+  color: var(--secondary-color);
+  text-shadow: 0 0 8px var(--secondary-color);
 }
 
 footer {
   text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid #0ff;
+  padding: 2rem 0;
+  border-top: 2px solid var(--primary-color);
   font-size: 0.9rem;
-  color: #999;
+  color: #888;
 }
