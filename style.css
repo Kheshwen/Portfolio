@@ -1,83 +1,105 @@
-/* Cyberpunk Theme CSS */
+/* Cyberpunk Style CSS */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap');
 
-:root {
-  --bg-color: #0f0f1a;
-  --primary-color: #00ffe7;
-  --secondary-color: #ff00c8;
-  --text-color: #e0e0e0;
-  --accent-color: #ffae00;
-}
-
-body {
+body.cyberpunk-theme {
   margin: 0;
+  padding: 0;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
   font-family: 'Orbitron', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #ff00ff;
 }
 
-.container {
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-header {
+.hero-section {
   text-align: center;
-  padding: 2rem 0;
-  border-bottom: 2px solid var(--primary-color);
-}
-
-h1 {
-  font-size: 3rem;
-  color: var(--primary-color);
-  text-shadow: 0 0 10px var(--primary-color);
+  padding: 100px 20px;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-bottom: 2px solid #ff00ff;
 }
 
 .tagline {
-  font-size: 1.2rem;
-  color: var(--secondary-color);
-  text-shadow: 0 0 6px var(--secondary-color);
+  font-size: 1.5rem;
+  color: #ff00ff;
+  text-shadow: 0 0 3px #ff00ff;
 }
 
-section {
-  margin: 3rem 0;
+.about, .projects, .skills, .blog, .contact {
+  padding: 60px 20px;
+  border-bottom: 1px solid #333;
 }
 
-h2 {
-  color: var(--accent-color);
-  text-shadow: 0 0 5px var(--accent-color);
-  margin-bottom: 1rem;
+.timeline {
+  border-left: 2px solid #00ffff;
+  padding-left: 20px;
+  margin-top: 20px;
 }
 
-p {
-  font-size: 1rem;
-  color: var(--text-color);
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.project-grid div {
+  background: #111;
+  border: 2px solid #00ffff;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-a {
-  color: var(--primary-color);
+.project-grid div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+}
+
+.skill-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.skill-board div {
+  background: #111;
+  padding: 15px 20px;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 10px #ff00ff;
+  text-align: center;
+}
+
+.neon-icons li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.neon-icons a {
+  color: #00ffff;
   text-decoration: none;
-  transition: 0.3s;
+  font-size: 1.2rem;
+  transition: color 0.3s, text-shadow 0.3s;
 }
 
-a:hover {
-  color: var(--secondary-color);
-  text-shadow: 0 0 8px var(--secondary-color);
+.neon-icons a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
 }
 
 footer {
   text-align: center;
-  padding: 2rem 0;
-  border-top: 2px solid var(--primary-color);
-  font-size: 0.9rem;
+  padding: 20px;
+  background: #111;
+  border-top: 2px solid #00ffff;
   color: #888;
+  font-size: 0.9rem;
 }
