@@ -1,5 +1,4 @@
-/* Cyberpunk Style CSS */
-
+/* Cyberpunk Interactive Style */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap');
 
 body.cyberpunk-theme {
@@ -13,88 +12,104 @@ body.cyberpunk-theme {
   overflow-x: hidden;
 }
 
-h1, h2, h3 {
+/* Glitch Effect for Header */
+.glitch h1 {
   font-family: 'Orbitron', sans-serif;
   color: #00ffff;
+  position: relative;
   text-shadow: 0 0 5px #00ffff, 0 0 10px #ff00ff;
 }
-
-.hero-section {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
-  border-bottom: 2px solid #ff00ff;
+.glitch h1::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -2px 0 #ff00ff;
+  animation: glitch 1s infinite linear alternate;
+}
+@keyframes glitch {
+  0% { transform: skewX(-5deg); }
+  50% { transform: skewX(5deg); }
+  100% { transform: skewX(-5deg); }
 }
 
+/* Tagline */
 .tagline {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #ff00ff;
-  text-shadow: 0 0 3px #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+  text-align: center;
+  margin-top: -10px;
 }
 
-.about, .projects, .skills, .blog, .contact {
+/* Sections */
+section {
   padding: 60px 20px;
-  border-bottom: 1px solid #333;
+  border-bottom: 2px solid #333;
 }
 
-.timeline {
-  border-left: 2px solid #00ffff;
-  padding-left: 20px;
-  margin-top: 20px;
-}
-
+/* Interactive Projects */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 20px;
 }
-
-.project-grid div {
+.project {
   background: #111;
   border: 2px solid #00ffff;
   padding: 20px;
+  text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.project-grid div:hover {
+.project:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
 }
 
+/* Animated Skills */
 .skill-board {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
-  margin-top: 20px;
+  gap: 20px;
 }
-
-.skill-board div {
+.skill {
   background: #111;
   padding: 15px 20px;
   border: 2px solid #ff00ff;
-  box-shadow: 0 0 10px #ff00ff;
   text-align: center;
+  position: relative;
+  color: #00ffff;
+  font-weight: bold;
+}
+.skill::before {
+  content: attr(data-power);
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 1rem;
+  color: #ff00ff;
 }
 
-.neon-icons li {
+/* Neon Contact Links */
+.neon-icons {
   list-style: none;
+  padding: 0;
+}
+.neon-icons li {
   margin: 10px 0;
 }
-
 .neon-icons a {
   color: #00ffff;
   text-decoration: none;
   font-size: 1.2rem;
   transition: color 0.3s, text-shadow 0.3s;
 }
-
 .neon-icons a:hover {
   color: #ff00ff;
   text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
 }
 
+/* Futuristic Footer */
 footer {
   text-align: center;
   padding: 20px;
