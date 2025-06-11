@@ -1,101 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap');
 
+html { scroll-behavior: smooth; } /* native smooth scroll */
+
 body.cyberpunk-theme {
-  margin: 0;
-  padding: 0;
-  background-color: #0a0a0a;
-  color: #e0e0e0;
-  font-family: 'Share Tech Mono', monospace;
-  background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
-  background-size: cover;
-  overflow-x: hidden;
+  margin: 0; background: #0a0a0a url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
+  color: #e0e0e0; font-family: 'Share Tech Mono', monospace;
 }
 
-/* Glitch Effect for Header */
-.glitch h1 {
-  font-family: 'Orbitron', sans-serif;
-  color: #00ffff;
-  position: relative;
-  text-shadow: 0 0 5px #00ffff, 0 0 10px #ff00ff;
+/* Sticky Nav */
+#mainNav {
+  :contentReference[oaicite:1]{index=1}
+  :contentReference[oaicite:2]{index=2}
 }
-.glitch h1::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  text-shadow: -2px 0 #ff00ff;
-  animation: glitch 1s infinite linear alternate;
+#mainNav ul { list-style: none; display: flex; justify-content: center; margin: 0; padding: 10px; }
+#mainNav li + li { margin-left: 30px; }
+#mainNav a {
+  :contentReference[oaicite:3]{index=3}
 }
-@keyframes glitch {
-  0% { transform: skewX(-5deg); }
-  50% { transform: skewX(5deg); }
-  100% { transform: skewX(-5deg); }
-}
+#mainNav a:hover { color: #ff00ff; }
 
-/* Sections */
-section {
-  padding: 60px 20px;
-  border-bottom: 2px solid #333;
+/* Panel Settings */
+.panel {
+  :contentReference[oaicite:4]{index=4}
+  :contentReference[oaicite:5]{index=5}
+  :contentReference[oaicite:6]{index=6}
 }
+:contentReference[oaicite:7]{index=7}
 
-/* Interactive Projects */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+/* Glitch Header */
+:contentReference[oaicite:8]{index=8}
+:contentReference[oaicite:9]{index=9}
+:contentReference[oaicite:10]{index=10}
+  :contentReference[oaicite:11]{index=11}
+  :contentReference[oaicite:12]{index=12}
 }
+:contentReference[oaicite:13]{index=13}
+:contentReference[oaicite:14]{index=14}
+
+/* Timeline */
+:contentReference[oaicite:15]{index=15}
+:contentReference[oaicite:16]{index=16}
+:contentReference[oaicite:17]{index=17}
+
+/* Projects */
+:contentReference[oaicite:18]{index=18}
 .project {
-  background: #111;
-  border: 2px solid #00ffff;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  :contentReference[oaicite:19]{index=19}
+  :contentReference[oaicite:20]{index=20}
 }
 .project:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+  :contentReference[oaicite:21]{index=21}
+  :contentReference[oaicite:22]{index=22}
 }
+:contentReference[oaicite:23]{index=23}
 
-/* Animated Skills */
-.skill-board {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+/* Skills */
+:contentReference[oaicite:24]{index=24}
 .skill {
-  background: #111;
-  padding: 15px 20px;
-  border: 2px solid #ff00ff;
-  text-align: center;
-  position: relative;
+  :contentReference[oaicite:25]{index=25}
+  :contentReference[oaicite:26]{index=26}
 }
 .skill::before {
-  content: attr(data-power);
-  position: absolute;
-  top: 0;
-  right: 10px;
-  font-size: 1rem;
-  color: #ff00ff;
+  :contentReference[oaicite:27]{index=27}
 }
 
-/* Neon Contact Links */
-.neon-icons a {
-  color: #00ffff;
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: color 0.3s, text-shadow 0.3s;
+/* Contact */
+:contentReference[oaicite:28]{index=28}
+:contentReference[oaicite:29]{index=29}
+:contentReference[oaicite:30]{index=30}
+  :contentReference[oaicite:31]{index=31}
 }
-.neon-icons a:hover {
-  color: #ff00ff;
-  text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
+:contentReference[oaicite:32]{index=32}
+  :contentReference[oaicite:33]{index=33}
 }
 
-/* Futuristic Footer */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  background: #111;
-  border-top: 2px solid #00ffff;
-  color: #888;
-  font-size: 0.9rem;
+  :contentReference[oaicite:34]{index=34}
+  :contentReference[oaicite:35]{index=35}
+}
+
+/* Mobile */
+:contentReference[oaicite:36]{index=36}
+  :contentReference[oaicite:37]{index=37}
+  :contentReference[oaicite:38]{index=38}
+  :contentReference[oaicite:39]{index=39}
+  :contentReference[oaicite:40]{index=40}
 }
