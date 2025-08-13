@@ -1,82 +1,164 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kheshwenda | Cyberpunk Coder</title>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+/* Custom color palette for anime aesthetic */
+:root {
+  /* Sage green palette */
+  --sage-50: #f8faf8;
+  --sage-100: #e8f5e8;
+  --sage-200: #d1e7d1;
+  --sage-300: #a8d8a8;
+  --sage-400: #7bb77b;
+  --sage-500: #5a9d5a;
+  --sage-600: #4a7c59;
+  --sage-700: #3d5e4a;
+  --sage-800: #344f3c;
+  --sage-900: #2d4133;
+  
+  /* Lavender palette */
+  --lavender-50: #faf7ff;
+  --lavender-100: #f0e8ff;
+  --lavender-200: #e4d4f4;
+  --lavender-300: #d2b7e8;
+  --lavender-400: #b794d6;
+  --lavender-500: #9975c4;
+  --lavender-600: #8559ab;
+  --lavender-700: #714891;
+  --lavender-800: #5e3c76;
+  --lavender-900: #4e3461;
+  
+  /* Cream palette */
+  --cream-50: #fefdf8;
+  --cream-100: #fefcf0;
+  --cream-200: #fef7da;
+  --cream-300: #fcefb7;
+  --cream-400: #f9e087;
+  --cream-500: #f5cc4a;
+  --cream-600: #d4a41a;
+  --cream-700: #b18314;
+  --cream-800: #8f6517;
+  --cream-900: #765318;
+}
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+/* Custom utility classes */
+@layer utilities {
+  .font-inter {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  .shadow-soft {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .text-shadow-soft {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
 
-  <!-- Link to your stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="cyberpunk-theme">
-  <!-- Navigation -->
-  <nav id="mainNav">
-    <ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+/* Sage color classes */
+.bg-sage-50 { background-color: var(--sage-50); }
+.bg-sage-100 { background-color: var(--sage-100); }
+.bg-sage-200 { background-color: var(--sage-200); }
+.bg-sage-300 { background-color: var(--sage-300); }
+.bg-sage-400 { background-color: var(--sage-400); }
+.bg-sage-500 { background-color: var(--sage-500); }
+.bg-sage-600 { background-color: var(--sage-600); }
 
-  <!-- Hero Section -->
-  <section id="hero" class="panel glitch">
-    <h1 data-text="Kheshwenda Narasimban">Kheshwenda Narasimban</h1>
-    <p class="tagline">Strategic Mind. Creative Code. Designed to Disrupt.</p>
-  </section>
+.text-sage-50 { color: var(--sage-50); }
+.text-sage-100 { color: var(--sage-100); }
+.text-sage-200 { color: var(--sage-200); }
+.text-sage-300 { color: var(--sage-300); }
+.text-sage-400 { color: var(--sage-400); }
+.text-sage-500 { color: var(--sage-500); }
+.text-sage-600 { color: var(--sage-600); }
+.text-sage-700 { color: var(--sage-700); }
 
-  <!-- About Section -->
-  <section id="about" class="panel">
-    <h2>About Me</h2>
-    <p>INTJ. Designer. Developer. Visionary-in-progress.</p>
-    <div class="timeline">
-      <div class="event">🚀 Started Coding — 2018</div>
-      <div class="event">⚡ Built AI Projects — 2022</div>
-      <div class="event">🌐 Exploring Cybernetics — Present</div>
-    </div>
-  </section>
+.border-sage-300 { border-color: var(--sage-300); }
+.hover\:bg-sage-50:hover { background-color: var(--sage-50); }
+.hover\:bg-sage-500:hover { background-color: var(--sage-500); }
+.hover\:bg-sage-600:hover { background-color: var(--sage-600); }
+.hover\:text-sage-500:hover { color: var(--sage-500); }
+.hover\:text-sage-600:hover { color: var(--sage-600); }
 
-  <!-- Projects Section -->
-  <section id="projects" class="panel">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project"><h3>Neural Nets Playground</h3><p>Demos visualized in real time.</p></div>
-      <div class="project"><h3>Cyberpunk Portfolio</h3><p>This site, crafted with neon flair.</p></div>
-      <div class="project"><h3>AI Chatbot</h3><p>Conversational model powered by NLP.</p></div>
-    </div>
-  </section>
+.from-sage-100 { --tw-gradient-from: var(--sage-100); }
+.from-sage-200 { --tw-gradient-from: var(--sage-200); }
+.to-sage-100 { --tw-gradient-to: var(--sage-100); }
+.to-sage-200 { --tw-gradient-to: var(--sage-200); }
 
-  <!-- Skills Section -->
-  <section id="skills" class="panel">
-    <h2>Skills & Stack</h2>
-    <div class="skill-board">
-      <div class="skill" data-power="90%">Python</div>
-      <div class="skill" data-power="85%">JavaScript</div>
-      <div class="skill" data-power="80%">Machine Learning</div>
-      <div class="skill" data-power="75%">HTML & CSS</div>
-    </div>
-  </section>
+.focus\:ring-sage-300:focus {
+  --tw-ring-color: var(--sage-300);
+}
 
-  <!-- Contact Section -->
-  <section id="contact" class="panel">
-    <h2>Contact</h2>
-    <ul class="neon-icons">
-      <li><a href="https://linkedin.com/in/kheshwenda/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-      <li><a href="https://github.com/kheshwen/" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-      <li><a href="mailto:khesh555@gmail.com"><i class="fas fa-envelope"></i> Email</a></li>
-    </ul>
-  </section>
+/* Lavender color classes */
+.bg-lavender-50 { background-color: var(--lavender-50); }
+.bg-lavender-100 { background-color: var(--lavender-100); }
+.bg-lavender-200 { background-color: var(--lavender-200); }
+.bg-lavender-300 { background-color: var(--lavender-300); }
+.bg-lavender-500 { background-color: var(--lavender-500); }
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Kheshwenda Narasimban. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+.text-lavender-500 { color: var(--lavender-500); }
+.text-lavender-600 { color: var(--lavender-600); }
+
+.hover\:bg-lavender-100:hover { background-color: var(--lavender-100); }
+
+.from-lavender-50 { --tw-gradient-from: var(--lavender-50); }
+.from-lavender-100 { --tw-gradient-from: var(--lavender-100); }
+.from-lavender-200 { --tw-gradient-from: var(--lavender-200); }
+.to-lavender-50 { --tw-gradient-to: var(--lavender-50); }
+.to-lavender-200 { --tw-gradient-to: var(--lavender-200); }
+
+/* Cream color classes */
+.bg-cream-50 { background-color: var(--cream-50); }
+.from-cream-50 { --tw-gradient-from: var(--cream-50); }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sage-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sage-500);
+}
+
+/* Loading animation for images */
+img {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure proper line height for better readability */
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for better accessibility */
+*:focus {
+  outline: 2px solid var(--sage-400);
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--sage-400);
+  outline-offset: 2px;
+}
+</Action>
