@@ -37,7 +37,7 @@
     ::-webkit-scrollbar-thumb { background: var(--ink); }
 
     /* cursor:none is applied via JS only when custom cursor is active */
-    body.js-cursor *, body.js-cursor a { cursor: none; }
+    body.js-cursor *, body.js-cursor a, body.js-cursor button { cursor: none; }
     #cursor {
       width: 8px; height: 8px;
       background: #fff;
@@ -45,7 +45,7 @@
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 99999;
       transition: transform 0.15s ease;
       transform: translate(-50%, -50%);
     }
@@ -56,7 +56,7 @@
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 99998;
       transition: transform 0.4s ease, width 0.3s, height 0.3s;
       transform: translate(-50%, -50%);
     }
@@ -127,7 +127,7 @@
       justify-content: center;
     }
 
-    /* New Profile Image Style for Hero */
+    /* Profile Image Style for Hero */
     .hero-profile-img {
       width: 55%;
       max-width: 420px;
@@ -260,7 +260,6 @@
       overflow: hidden;
     }
 
-    /* Fanart background — official art, personal portfolio use, low opacity */
     .about-bg {
       position: absolute;
       top: 50%;
@@ -271,7 +270,6 @@
       object-fit: cover;
       object-position: center top;
       opacity: 0.06;
-      /* Made completely grayscale to fit the panda theme */
       filter: grayscale(100%) contrast(1.1);
       pointer-events: none;
       user-select: none;
@@ -499,7 +497,23 @@
     .larr { transition: transform 0.3s; }
 
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-    .field-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.5rem; display: block; }
+    
+    /* GEMINI API: Contact Form AI Features */
+    .field-header {
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0.5rem;
+    }
+    .field-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    
+    .ai-btn {
+      font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);
+      background: var(--white); border: none; padding: 0.3rem 0.8rem; border-radius: 20px;
+      transition: opacity 0.3s, transform 0.2s; display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .ai-btn:hover { opacity: 0.8; transform: translateY(-1px); }
+    .ai-btn:active { transform: translateY(0); }
+    .ai-btn.loading { opacity: 0.5; pointer-events: none; }
+
     .field-input, .field-textarea {
       width: 100%; background: transparent;
       border: none; border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -522,6 +536,55 @@
     }
     .btn-submit:hover { border-color: var(--white); }
 
+    /* GEMINI API: Floating AI Chat Assistant */
+    #ai-chat-btn {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 55px; height: 55px; border-radius: 50%;
+      background: var(--ink); color: var(--white); border: 1px solid var(--rule);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; z-index: 900; transition: transform 0.3s ease;
+    }
+    #ai-chat-btn:hover { transform: scale(1.05) translateY(-5px); }
+
+    #ai-chat-modal {
+      position: fixed; bottom: 6rem; right: 2rem;
+      width: 320px; height: 400px; background: var(--white);
+      border: 1px solid var(--rule); border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      display: flex; flex-direction: column; z-index: 900;
+      opacity: 0; pointer-events: none; transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      overflow: hidden;
+    }
+    #ai-chat-modal.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    
+    .chat-header {
+      background: var(--ink); color: var(--white); padding: 1rem;
+      font-family: 'Shippori Mincho', serif; font-size: 0.9rem; letter-spacing: 0.1em;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .chat-close { background: none; border: none; color: var(--white); font-size: 1.2rem; opacity: 0.7; }
+    .chat-close:hover { opacity: 1; }
+    
+    .chat-body { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; }
+    .chat-msg { max-width: 85%; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; }
+    .chat-msg.bot { align-self: flex-start; background: var(--offwhite); color: var(--ink); border-bottom-left-radius: 0; }
+    .chat-msg.user { align-self: flex-end; background: var(--ink); color: var(--white); border-bottom-right-radius: 0; }
+    
+    .chat-input-area {
+      display: flex; border-top: 1px solid var(--rule); padding: 0.5rem;
+    }
+    .chat-input {
+      flex: 1; border: none; outline: none; padding: 0.5rem;
+      font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.85rem;
+    }
+    .chat-send {
+      background: transparent; border: none; color: var(--ink);
+      font-size: 1.2rem; padding: 0 0.5rem; opacity: 0.5; transition: opacity 0.3s;
+    }
+    .chat-send:hover { opacity: 1; }
+
     footer {
       background: var(--ink);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -543,8 +606,8 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* PANDAS */
-    .panda-fall {
+    /* LEAVES */
+    .leaf-fall {
       position: absolute;
       pointer-events: none;
       animation: fall linear infinite;
@@ -572,6 +635,7 @@
       .project-row { grid-template-columns: 60px 1fr; gap: 1rem; }
       .proj-desc, .proj-tags { display: none; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      #ai-chat-modal { width: calc(100vw - 3rem); right: 1.5rem; }
     }
   </style>
 </head>
@@ -799,8 +863,24 @@
         </div>
       </div>
     </div>
-    <svg class="ach-panda" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M17.5,2 A4.5,4.5 0 0 1 22,6.5 C22,7.9 21.3,9.1 20.3,10 A8.9,8.9 0 0 1 21,14 C21,18.9 17,23 12,23 C7,23 3,18.9 3,14 C3,12.5 3.4,11.2 4,10 A4.5,4.5 0 0 1 2,6.5 A4.5,4.5 0 0 1 6.5,2 C7.9,2 9.1,2.7 10,3.7 A8.9,8.9 0 0 1 12,3.3 C13.3,3.3 14.5,3.6 15.6,4 A4.5,4.5 0 0 1 17.5,2 Z M9,13 A2,2 0 1 0 9,17 A2,2 0 1 0 9,13 Z M15,13 A2,2 0 1 0 15,17 A2,2 0 1 0 15,13 Z M12,18 A1.5,1.5 0 1 0 12,21 A1.5,1.5 0 1 0 12,18 Z" fill="#000000" fill-rule="evenodd" clip-rule="evenodd"/>
+    <svg class="ach-panda" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <g fill="var(--ink)">
+        <!-- Ears -->
+        <circle cx="22" cy="28" r="16" />
+        <circle cx="78" cy="28" r="16" />
+        <!-- Eye Patches -->
+        <ellipse cx="32" cy="58" rx="14" ry="18" transform="rotate(-20 32 58)" />
+        <ellipse cx="68" cy="58" rx="14" ry="18" transform="rotate(20 68 58)" />
+        <!-- Nose -->
+        <ellipse cx="50" cy="74" rx="6" ry="4" />
+      </g>
+      <!-- Head Outline -->
+      <path d="M50 18 C20 18 5 38 5 62 C5 85 25 95 50 95 C75 95 95 85 95 62 C95 38 80 18 50 18 Z" stroke="var(--ink)" stroke-width="6" fill="none"/>
+      <!-- Cute "w" Mouth -->
+      <path d="M44 80 Q47 84 50 80 Q53 84 56 80" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <!-- Eye Glints -->
+      <circle cx="34" cy="54" r="3.5" fill="var(--paper)"/>
+      <circle cx="66" cy="54" r="3.5" fill="var(--paper)"/>
     </svg>
   </section>
 
@@ -947,8 +1027,18 @@
           <div class="rv h"></div><div class="rv l"></div><div class="rv m"></div><div class="rv s"></div>
           <div class="rv sp"></div>
           <div class="rv h"></div><div class="rv x"></div><div class="rv m"></div><div class="rv l"></div>
-          <svg class="rv-panda" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M17.5,2 A4.5,4.5 0 0 1 22,6.5 C22,7.9 21.3,9.1 20.3,10 A8.9,8.9 0 0 1 21,14 C21,18.9 17,23 12,23 C7,23 3,18.9 3,14 C3,12.5 3.4,11.2 4,10 A4.5,4.5 0 0 1 2,6.5 A4.5,4.5 0 0 1 6.5,2 C7.9,2 9.1,2.7 10,3.7 A8.9,8.9 0 0 1 12,3.3 C13.3,3.3 14.5,3.6 15.6,4 A4.5,4.5 0 0 1 17.5,2 Z M9,13 A2,2 0 1 0 9,17 A2,2 0 1 0 9,13 Z M15,13 A2,2 0 1 0 15,17 A2,2 0 1 0 15,13 Z M12,18 A1.5,1.5 0 1 0 12,21 A1.5,1.5 0 1 0 12,18 Z" fill="#000000" fill-rule="evenodd" clip-rule="evenodd"/>
+          <svg class="rv-panda" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <g fill="var(--ink)">
+              <circle cx="22" cy="28" r="16" />
+              <circle cx="78" cy="28" r="16" />
+              <ellipse cx="32" cy="58" rx="14" ry="18" transform="rotate(-20 32 58)" />
+              <ellipse cx="68" cy="58" rx="14" ry="18" transform="rotate(20 68 58)" />
+              <ellipse cx="50" cy="74" rx="6" ry="4" />
+            </g>
+            <path d="M50 18 C20 18 5 38 5 62 C5 85 25 95 50 95 C75 95 95 85 95 62 C95 38 80 18 50 18 Z" stroke="var(--ink)" stroke-width="6" fill="none"/>
+            <path d="M44 80 Q47 84 50 80 Q53 84 56 80" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="34" cy="54" r="3.5" fill="var(--paper)"/>
+            <circle cx="66" cy="54" r="3.5" fill="var(--paper)"/>
           </svg>
         </div>
         <div class="resume-info">
@@ -963,7 +1053,7 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT & GEMINI DRAfter -->
   <section id="contact">
     <div class="sw">
       <div class="contact-wrap">
@@ -989,15 +1079,28 @@
             <input id="userEmail" name="email" class="field-input" type="email" placeholder="your@email.com" required/>
           </div>
           <div>
-            <label class="field-label" for="userMessage">Message</label>
-            <textarea id="userMessage" name="message" class="field-textarea" placeholder="What's on your mind?" required></textarea>
+            <div class="field-header">
+              <label class="field-label" for="userMessage">Message</label>
+              <button type="button" id="ai-draft-btn" class="ai-btn">✨ Rewrite professionally</button>
+            </div>
+            <textarea id="userMessage" name="message" class="field-textarea" placeholder="Just type roughly what you want to say, and click the AI button above to polish it..." required></textarea>
           </div>
           <button type="submit" class="btn-submit">Send Message →</button>
         </form>
       </div>
     </div>
-    <svg class="contact-panda-bg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M17.5,2 A4.5,4.5 0 0 1 22,6.5 C22,7.9 21.3,9.1 20.3,10 A8.9,8.9 0 0 1 21,14 C21,18.9 17,23 12,23 C7,23 3,18.9 3,14 C3,12.5 3.4,11.2 4,10 A4.5,4.5 0 0 1 2,6.5 A4.5,4.5 0 0 1 6.5,2 C7.9,2 9.1,2.7 10,3.7 A8.9,8.9 0 0 1 12,3.3 C13.3,3.3 14.5,3.6 15.6,4 A4.5,4.5 0 0 1 17.5,2 Z M9,13 A2,2 0 1 0 9,17 A2,2 0 1 0 9,13 Z M15,13 A2,2 0 1 0 15,17 A2,2 0 1 0 15,13 Z M12,18 A1.5,1.5 0 1 0 12,21 A1.5,1.5 0 1 0 12,18 Z" fill="white" fill-rule="evenodd" clip-rule="evenodd"/>
+    <svg class="contact-panda-bg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <g fill="var(--white)">
+        <circle cx="22" cy="28" r="16" />
+        <circle cx="78" cy="28" r="16" />
+        <ellipse cx="32" cy="58" rx="14" ry="18" transform="rotate(-20 32 58)" />
+        <ellipse cx="68" cy="58" rx="14" ry="18" transform="rotate(20 68 58)" />
+        <ellipse cx="50" cy="74" rx="6" ry="4" />
+      </g>
+      <path d="M50 18 C20 18 5 38 5 62 C5 85 25 95 50 95 C75 95 95 85 95 62 C95 38 80 18 50 18 Z" stroke="var(--white)" stroke-width="6" fill="none"/>
+      <path d="M44 80 Q47 84 50 80 Q53 84 56 80" stroke="var(--white)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <circle cx="34" cy="54" r="3.5" fill="var(--ink)"/>
+      <circle cx="66" cy="54" r="3.5" fill="var(--ink)"/>
     </svg>
   </section>
 
@@ -1006,8 +1109,25 @@
     <span>© 2025 · All rights reserved</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Custom cursor — only activates if JS loads successfully
+  <!-- GEMINI API: Floating Assistant Modal -->
+  <button id="ai-chat-btn" aria-label="Open AI Assistant">✨</button>
+  <div id="ai-chat-modal">
+    <div class="chat-header">
+      <span>Ask Keshi's AI</span>
+      <button class="chat-close" id="chat-close-btn">&times;</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="chat-msg bot">Hi! I'm Kheshwenda's AI assistant. Ask me anything about his skills, projects, or background!</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Type a question..." />
+      <button id="chat-send-btn" class="chat-send">➤</button>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // --- Custom Cursor ---
     document.body.classList.add('js-cursor');
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursor-ring');
@@ -1040,7 +1160,7 @@
       });
     });
 
-    // Nav border on scroll
+    // --- Layout & Interactions ---
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
     });
@@ -1057,15 +1177,15 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    // Falling leaves - Panda monochrome palette
+    // --- Falling Leaves - Panda monochrome palette ---
     const lc   = document.getElementById('leaves');
-    const lp   = "M17.5,2 A4.5,4.5 0 0 1 22,6.5 C22,7.9 21.3,9.1 20.3,10 A8.9,8.9 0 0 1 21,14 C21,18.9 17,23 12,23 C7,23 3,18.9 3,14 C3,12.5 3.4,11.2 4,10 A4.5,4.5 0 0 1 2,6.5 A4.5,4.5 0 0 1 6.5,2 C7.9,2 9.1,2.7 10,3.7 A8.9,8.9 0 0 1 12,3.3 C13.3,3.3 14.5,3.6 15.6,4 A4.5,4.5 0 0 1 17.5,2 Z M9,13 A2,2 0 1 0 9,17 A2,2 0 1 0 9,13 Z M15,13 A2,2 0 1 0 15,17 A2,2 0 1 0 15,13 Z M12,18 A1.5,1.5 0 1 0 12,21 A1.5,1.5 0 1 0 12,18 Z";
+    const lp   = "M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z";
     const cols = ['#000000', '#1a1a1a', '#333333', '#4d4d4d', '#666666'];
 
     function mkLeaf() {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       const sz  = 16 + Math.random() * 20;
-      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('viewBox', '0 0 200 220');
       svg.setAttribute('width',  sz);
       svg.setAttribute('height', sz);
       svg.setAttribute('aria-hidden', 'true');
@@ -1073,10 +1193,8 @@
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       p.setAttribute('d',    lp);
       p.setAttribute('fill', cols[Math.floor(Math.random() * cols.length)]);
-      p.setAttribute('fill-rule', 'evenodd');
-      p.setAttribute('clip-rule', 'evenodd');
       svg.appendChild(p);
-      svg.classList.add('panda-fall');
+      svg.classList.add('leaf-fall');
       const dur = 9  + Math.random() * 10;
       const del = Math.random() * 12;
       svg.style.animationDuration = dur + 's';
@@ -1087,6 +1205,116 @@
 
     setInterval(mkLeaf, 1600);
     for (let i = 0; i < 6; i++) setTimeout(mkLeaf, i * 300);
+
+    // ==========================================
+    // GEMINI API INTEGRATION
+    // ==========================================
+    const apiKey = ""; // Execution environment provides the key
+
+    async function callGeminiAPI(promptText, systemInstructionText = null) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const payload = { contents: [{ parts: [{ text: promptText }] }] };
+      if (systemInstructionText) {
+        payload.systemInstruction = { parts: [{ text: systemInstructionText }] };
+      }
+
+      let delay = 1000;
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('Network error');
+          const data = await res.json();
+          return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+        } catch (error) {
+          if (i === 4) return "Sorry, I couldn't reach the AI right now. Please try again later!";
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    // --- Feature 1: Contact Form AI Drafter ---
+    const draftBtn = document.getElementById('ai-draft-btn');
+    const msgBox = document.getElementById('userMessage');
+
+    draftBtn.addEventListener('click', async () => {
+      const currentText = msgBox.value.trim();
+      if (!currentText) {
+        msgBox.value = "Please write a few words first, and I will rewrite it to sound professional! ✨";
+        return;
+      }
+      
+      draftBtn.classList.add('loading');
+      draftBtn.innerText = "✨ Rewriting...";
+      
+      const prompt = `Rewrite the following rough message into a polished, professional, and polite message to Kheshwenda (Keshi) for a portfolio contact form. Keep it concise.\n\nRough Message: "${currentText}"`;
+      
+      const polishedText = await callGeminiAPI(prompt);
+      msgBox.value = polishedText.trim();
+      
+      draftBtn.classList.remove('loading');
+      draftBtn.innerText = "✨ Rewrite professionally";
+    });
+
+    // --- Feature 2: Floating AI Assistant ---
+    const chatBtn = document.getElementById('ai-chat-btn');
+    const chatModal = document.getElementById('ai-chat-modal');
+    const chatClose = document.getElementById('chat-close-btn');
+    const chatBody = document.getElementById('chat-body');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send-btn');
+
+    const keshiContext = `
+      You are an AI assistant representing Kheshwenda (Keshi) on his portfolio website.
+      Answer questions concisely, politely, and enthusiastically. Use 1-2 short sentences.
+      Bio: Keshi is a 2nd year CS student at Universiti Teknologi PETRONAS (UTP) in Seri Iskandar, Perak.
+      Skills: C++, Python, JavaScript, HTML/CSS, C#, SQL, Lua, React, Game Dev, UI/UX Design.
+      Projects: Smart Parking System (C++), VR Logic Gate Puzzle (Roblox), Cyberpunk Portfolio, Emotion Recognition Face Reader, Astralis Action RPG.
+      Extracurriculars: Project Director at Rotaract UTP (media, PR, emcee). Accepted to KAIST Exchange.
+      Hobbies: Anime (Cyberpunk Edgerunners), Action RPGs, Stock Trading, Cooking, Learning Japanese and Mandarin.
+      If asked something you don't know or if they want to hire him, encourage them to use the contact form at the bottom of the page.
+    `;
+
+    function addMessage(text, sender) {
+      const div = document.createElement('div');
+      div.className = `chat-msg ${sender}`;
+      div.innerText = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    chatBtn.addEventListener('click', () => chatModal.classList.add('open'));
+    chatClose.addEventListener('click', () => chatModal.classList.remove('open'));
+
+    async function handleChatSubmit() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      addMessage(text, 'user');
+      chatInput.value = '';
+      
+      const loadingId = 'loading-' + Date.now();
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'chat-msg bot';
+      loadingDiv.id = loadingId;
+      loadingDiv.innerText = "Thinking...";
+      chatBody.appendChild(loadingDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      const response = await callGeminiAPI(text, keshiContext);
+      
+      document.getElementById(loadingId).remove();
+      addMessage(response, 'bot');
+    }
+
+    chatSend.addEventListener('click', handleChatSubmit);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleChatSubmit();
+    });
   </script>
 </body>
 </html>
