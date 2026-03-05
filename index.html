@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kheshwenda Narasimban</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --white:   #faf9f7;
+      --offwhite:#f3f0eb;
+      --paper:   #ede8e0;
+      --ink:     #1a1714;
+      --ink2:    #3a3530;
+      --muted:   #8a8078;
+      --rule:    rgba(26,23,20,0.1);
+      --crimson: #9b2020;
+      --rust:    #b84a1a;
+      --amber:   #c47a1a;
+      --maple:   #8b1a1a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--white); }
+    ::-webkit-scrollbar-thumb { background: var(--crimson); }
+
+    /* cursor:none is applied via JS only when custom cursor is active */
+    body.js-cursor *, body.js-cursor a { cursor: none; }
+    #cursor {
+      width: 8px; height: 8px;
+      background: var(--crimson);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+    #cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(155,32,32,0.35);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.4s ease, width 0.3s, height 0.3s;
+      transform: translate(-50%, -50%);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.8rem 4rem;
+      background: rgba(250,249,247,0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.4s;
+    }
+    nav.scrolled { border-bottom-color: var(--rule); }
+
+    .nav-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    #hero {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 6rem;
+      background: var(--white);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-right {
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .maple-hero-svg {
+      width: 72%;
+      opacity: 0.11;
+      animation: floatLeaf 8s ease-in-out infinite;
+    }
+
+    @keyframes floatLeaf {
+      0%,100% { transform: rotate(-4deg) translateY(0); }
+      50%      { transform: rotate(2deg) translateY(-16px); }
+    }
+
+    .hero-jp {
+      position: absolute;
+      bottom: 3.5rem; right: 3rem;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+      opacity: 0.4;
+    }
+
+    .hero-name {
+      font-family: 'Shippori Mincho', serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      animation: fadeUp 1s 0.1s ease both;
+    }
+    .hero-name em { font-style: normal; font-weight: 400; color: var(--muted); }
+
+    .hero-line {
+      width: 48px; height: 1px;
+      background: var(--crimson);
+      margin-bottom: 1.6rem;
+      animation: expandLine 1s 0.3s ease both;
+      transform-origin: left;
+    }
+    @keyframes expandLine {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 360px;
+      margin-bottom: 3rem;
+      animation: fadeUp 1s 0.25s ease both;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 1.8rem; align-items: center;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+
+    .btn-text {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--ink);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .btn-text:hover { color: var(--crimson); border-color: var(--crimson); }
+
+    .btn-ghost {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .btn-ghost:hover { color: var(--ink); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem; left: 4rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeUp 1.2s 0.7s ease both;
+    }
+    .scroll-tick {
+      width: 1px; height: 32px; background: var(--crimson);
+      animation: tickPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes tickPulse {
+      0%,100% { height: 32px; opacity: 1; }
+      50%     { height: 14px; opacity: 0.4; }
+    }
+
+    /* SHARED */
+    .sw { max-width: 1080px; margin: 0 auto; }
+
+    .sec-meta {
+      display: flex; align-items: baseline; gap: 2rem;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sec-num {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.75rem; letter-spacing: 0.3em;
+      color: var(--crimson); font-weight: 400;
+    }
+    .sec-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; color: var(--ink); letter-spacing: 0.02em;
+    }
+    .sec-title em { font-style: normal; font-weight: 400; color: var(--muted); }
+
+    /* ABOUT */
+    #about {
+      padding: 10rem 4rem;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fanart background — official art, personal portfolio use, low opacity */
+    .about-fanart-bg {
+      position: absolute;
+      top: 50%;
+      right: -4%;
+      transform: translateY(-50%);
+      width: 68%;
+      height: auto;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0.08;
+      filter: grayscale(55%) sepia(35%) contrast(1.1);
+      pointer-events: none;
+      user-select: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%, black 80%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 22%, black 80%, transparent 100%);
+    }
+
+    .about-fanart-credit {
+      position: absolute;
+      bottom: 3rem; right: 4rem;
+      font-family: 'Shippori Mincho', serif;
+      font-style: italic; font-size: 0.72rem;
+      color: var(--muted); opacity: 0.5;
+      letter-spacing: 0.08em;
+      writing-mode: vertical-rl;
+    }
+
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-text { font-size: 1rem; line-height: 2; color: var(--ink2); margin-bottom: 3rem; }
+    .about-text p { margin-bottom: 1.4rem; }
+
+    .about-facts {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--rule);
+    }
+    .fact {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .fact:nth-child(odd) { padding-right: 2rem; border-right: 1px solid var(--rule); }
+    .fact:nth-child(even) { padding-left: 2rem; }
+    .fact-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .fact-value { font-family: 'Shippori Mincho', serif; font-size: 1rem; color: var(--ink); }
+
+    /* SKILLS */
+    #skills { padding: 10rem 4rem; background: var(--offwhite); }
+
+    .skills-cols {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+    }
+    .skill-col {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .skill-col-head {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 1.5rem;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+    }
+    .skill-items { display: flex; flex-direction: column; gap: 0.7rem; }
+    .skill-item { font-size: 0.88rem; color: var(--ink2); }
+
+    /* PROJECTS */
+    #projects { padding: 10rem 4rem; background: var(--white); }
+
+    .projects-list { border-top: 1px solid var(--rule); }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr auto;
+      gap: 3rem; align-items: center;
+      padding: 2.5rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none; color: inherit;
+      transition: background 0.4s;
+      position: relative; overflow: hidden;
+    }
+    .project-row::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--crimson);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.4s ease;
+    }
+    .project-row:hover::before { transform: scaleY(1); }
+    .project-row:hover { background: rgba(237,232,224,0.4); }
+
+    .proj-num { font-family: 'Shippori Mincho', serif; font-size: 0.85rem; color: var(--muted); letter-spacing: 0.2em; }
+    .proj-name { font-family: 'Shippori Mincho', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); }
+    .proj-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .proj-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+    .proj-tag {
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem; border: 1px solid var(--rule); color: var(--muted);
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements { padding: 10rem 4rem; background: var(--paper); position: relative; overflow: hidden; }
+
+    .ach-maple {
+      position: absolute; right: -80px; top: 50%; transform: translateY(-50%);
+      width: 380px; opacity: 0.06; pointer-events: none;
+    }
+
+    .ach-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+    }
+    .ach-item {
+      padding: 3rem;
+      border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .ach-year { font-family: 'Shippori Mincho', serif; font-size: 0.75rem; letter-spacing: 0.3em; color: var(--crimson); margin-bottom: 1rem; }
+    .ach-title { font-family: 'Shippori Mincho', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.4; }
+    .ach-detail { font-size: 0.83rem; color: var(--muted); line-height: 1.8; }
+
+    /* HOBBIES */
+    #hobbies { padding: 10rem 4rem; background: var(--white); }
+
+    .marquee-wrap {
+      overflow: hidden; margin-bottom: 5rem;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      padding: 1.5rem 0;
+    }
+    .marquee-track {
+      display: flex; gap: 4rem;
+      animation: marquee 22s linear infinite; white-space: nowrap; width: max-content;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.1rem; font-weight: 300; font-style: italic;
+      color: var(--muted);
+    }
+    .mdot { width: 4px; height: 4px; border-radius: 50%; background: var(--crimson); flex-shrink: 0; }
+
+    .hobby-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .hobby-card { padding: 3rem 2.5rem; background: var(--offwhite); transition: background 0.4s; }
+    .hobby-card:hover { background: var(--paper); }
+    .hobby-icon { font-size: 1.5rem; display: block; margin-bottom: 1.5rem; }
+    .hobby-name { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+    .hobby-note { font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+    /* BLOG */
+    #blog { padding: 10rem 4rem; background: var(--offwhite); }
+
+    .blog-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+    }
+    .blog-card {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      text-decoration: none; color: inherit;
+      transition: background 0.4s; display: block;
+    }
+    .blog-card:hover { background: rgba(235,232,224,0.6); }
+    .blog-cat { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1.2rem; }
+    .blog-title { font-family: 'Shippori Mincho', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.5; margin-bottom: 1rem; }
+    .blog-excerpt { font-size: 0.83rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+    .blog-read { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--rule); padding-bottom: 2px; display: inline-block; }
+
+    /* RESUME */
+    #resume { padding: 10rem 4rem; background: var(--white); }
+
+    .resume-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8rem; align-items: center; }
+
+    .resume-visual {
+      aspect-ratio: 3/4; background: var(--paper);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; padding: 3rem; gap: 0.8rem;
+    }
+    .rv { height: 8px; background: rgba(26,23,20,0.07); border-radius: 1px; }
+    .rv.h { height: 14px; background: rgba(155,32,32,0.15); width: 55%; }
+    .rv.s { width: 40%; }
+    .rv.m { width: 68%; }
+    .rv.l { width: 88%; }
+    .rv.x { width: 100%; }
+    .rv.sp { height: 1rem; background: transparent; }
+    .rv-leaf {
+      position: absolute; bottom: -24px; right: -24px;
+      width: 130px; opacity: 0.09; transform: rotate(18deg);
+    }
+
+    .resume-info h3 { font-family: 'Shippori Mincho', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; line-height: 1.4; }
+    .resume-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.9; margin-bottom: 2.5rem; }
+    .resume-btns { display: flex; flex-direction: column; gap: 1rem; }
+
+    /* CONTACT */
+    #contact { padding: 10rem 4rem; background: var(--ink); position: relative; overflow: hidden; }
+
+    .contact-leaf-bg {
+      position: absolute; right: -60px; bottom: -60px;
+      width: 460px; opacity: 0.04; pointer-events: none; transform: rotate(-10deg);
+    }
+
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; position: relative; z-index: 2; }
+
+    .sec-num.inv { color: var(--rust); }
+    .sec-title.inv { color: rgba(240,234,224,0.9); }
+    .sec-title.inv em { color: rgba(240,234,224,0.35); }
+    .sec-meta.inv { border-bottom-color: rgba(255,255,255,0.08); margin-bottom: 2.5rem; }
+
+    .contact-tagline {
+      font-family: 'Shippori Mincho', serif; font-style: italic;
+      font-size: 1.2rem; color: rgba(240,234,224,0.45);
+      line-height: 1.8; margin-bottom: 3rem;
+    }
+
+    .contact-links-list { border-top: 1px solid rgba(255,255,255,0.08); }
+    .contact-link-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none; color: rgba(240,234,224,0.55);
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .contact-link-row:hover { color: rgba(240,234,224,0.95); }
+    .contact-link-row:hover .larr { transform: translateX(4px); }
+    .larr { transition: transform 0.3s; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .field-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(240,234,224,0.3); margin-bottom: 0.5rem; display: block; }
+    .field-input, .field-textarea {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: rgba(240,234,224,0.9);
+      font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 300; font-size: 0.95rem;
+      padding: 0.6rem 0; outline: none; transition: border-color 0.3s;
+    }
+    .field-input:focus, .field-textarea:focus { border-bottom-color: var(--rust); }
+    .field-textarea { resize: none; min-height: 80px; }
+
+    .btn-submit {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400;
+      font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(240,234,224,0.9); background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.9rem 2rem;
+      transition: border-color 0.3s, color 0.3s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { border-color: var(--rust); }
+
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.68rem; letter-spacing: 0.2em;
+      color: rgba(240,234,224,0.22);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LEAVES */
+    .leaf-fall {
+      position: absolute;
+      pointer-events: none;
+      animation: fall linear infinite;
+      opacity: 0;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+      8%   { opacity: 0.14; }
+      92%  { opacity: 0.09; }
+      100% { transform: translateY(110vh) rotate(400deg); opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #about, #skills, #projects, #achievements, #hobbies, #blog, #resume, #contact { padding: 6rem 1.5rem; }
+      .about-body, .contact-wrap, .resume-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-fanart-bg { width: 100%; height: 60%; top: auto; bottom: 0; opacity: 0.07; }
+      .about-fanart-credit { display: none; }
+      .skills-cols { grid-template-columns: repeat(2, 1fr); }
+      .hobby-cards, .blog-grid { grid-template-columns: 1fr; }
+      .ach-grid { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 60px 1fr; gap: 1rem; }
+      .proj-desc, .proj-tags { display: none; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="leaves" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="#hero">Kheshwenda</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Awards</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <h1 class="hero-name">
+        Kheshwenda<br>
+        <em>Narasimban</em>
+      </h1>
+      <div class="hero-line"></div>
+      <p class="hero-desc">
+        Builder, thinker, and creative — drawn to the space where engineering meets design and intention meets execution.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-text">View Work</a>
+        <a href="#contact" class="btn-ghost">Say Hello</a>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-tick"></div>
+        Scroll
+      </div>
+    </div>
+    <div class="hero-right">
+      <svg class="maple-hero-svg" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z" fill="#8b1a1a"/>
+        <rect x="95" y="133" width="10" height="55" rx="3" fill="#6b1010"/>
+        <line x1="100" y1="40" x2="100" y2="118" stroke="#6b1010" stroke-width="1.5" opacity="0.4"/>
+        <line x1="100" y1="70" x2="55" y2="90" stroke="#6b1010" stroke-width="1" opacity="0.3"/>
+        <line x1="100" y1="70" x2="145" y2="90" stroke="#6b1010" stroke-width="1" opacity="0.3"/>
+        <line x1="100" y1="90" x2="65" y2="112" stroke="#6b1010" stroke-width="0.8" opacity="0.25"/>
+        <line x1="100" y1="90" x2="135" y2="112" stroke="#6b1010" stroke-width="0.8" opacity="0.25"/>
+      </svg>
+      <div class="hero-jp">赤い葉 · Crimson Leaf</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <img
+      class="about-fanart-bg"
+      src="warumono-fanart.png"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">About <em>Me</em></h2>
+      </div>
+      <div class="about-body reveal">
+        <div class="about-text">
+          <p>I'm Kheshwenda — known as Keshi — a second-year Computer Science student at Universiti Teknologi PETRONAS, based in Seri Iskandar, Perak. I build things that are both technically precise and thoughtfully designed, from system-level C++ to interactive game experiences and web interfaces.</p>
+          <p>I spent two years in Rotaract UTP in roles ranging from volunteer to Project Director, running events across media, PR and emcee work — which shaped how I think about communication, leadership and execution under pressure.</p>
+          <p>Outside of code, I'm into anime, action RPGs (Arknights: Endfield, Punishing: Gray Raven), stock trading, Indian cinema and cooking. I'm also actively learning Japanese and Mandarin Chinese — working toward full proficiency in both.</p>
+        </div>
+        <div class="about-facts">
+          <div class="fact"><div class="fact-label">University</div><div class="fact-value">Universiti Teknologi PETRONAS</div></div>
+          <div class="fact"><div class="fact-label">Year</div><div class="fact-value">Year 2, CS</div></div>
+          <div class="fact"><div class="fact-label">Based In</div><div class="fact-value">Seri Iskandar, Perak</div></div>
+          <div class="fact"><div class="fact-label">Internship</div><div class="fact-value">Available Jan 2027</div></div>
+          <div class="fact"><div class="fact-label">Languages</div><div class="fact-value">EN · BM · JP · ZH</div></div>
+          <div class="fact"><div class="fact-label">GitHub</div><div class="fact-value">github.com/Kheshwen</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-fanart-credit" aria-hidden="true">Warumono-san · Kyuujitsu no Warumono-san</div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Skills &amp; <em>Stack</em></h2>
+      </div>
+      <div class="skills-cols reveal">
+        <div class="skill-col">
+          <div class="skill-col-head">Languages</div>
+          <div class="skill-items">
+            <span class="skill-item">C++</span>
+            <span class="skill-item">Python</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">HTML / CSS</span>
+            <span class="skill-item">C#</span>
+            <span class="skill-item">SQL</span>
+            <span class="skill-item">Lua</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-head">Tools &amp; Platforms</div>
+          <div class="skill-items">
+            <span class="skill-item">React</span>
+            <span class="skill-item">Git &amp; GitHub</span>
+            <span class="skill-item">Roblox Studio</span>
+            <span class="skill-item">Figma</span>
+            <span class="skill-item">VS Code</span>
+            <span class="skill-item">NVIDIA App</span>
+            <span class="skill-item">Pop!_OS / Linux</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-head">Concepts</div>
+          <div class="skill-items">
+            <span class="skill-item">OOP</span>
+            <span class="skill-item">Data Structures</span>
+            <span class="skill-item">BFS / DFS Graph Traversal</span>
+            <span class="skill-item">Adjacency Matrix</span>
+            <span class="skill-item">UI/UX Design</span>
+            <span class="skill-item">Game Development</span>
+            <span class="skill-item">Oil &amp; Gas Fundamentals</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-head">Soft Skills</div>
+          <div class="skill-items">
+            <span class="skill-item">Event Direction</span>
+            <span class="skill-item">Emcee &amp; Public Speaking</span>
+            <span class="skill-item">Media &amp; PR</span>
+            <span class="skill-item">Copywriting</span>
+            <span class="skill-item">Project Leadership</span>
+            <span class="skill-item">Japanese (Beginner)</span>
+            <span class="skill-item">Mandarin Chinese (Learning)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Featured <em>Projects</em></h2>
+      </div>
+      <div class="projects-list reveal">
+        <a href="https://github.com/Kheshwen" class="project-row" target="_blank" rel="noopener noreferrer">
+          <div class="proj-num">001</div>
+          <div class="proj-name">Smart Parking System</div>
+          <div class="proj-desc">C++ system managing real-time parking slot allocation using linked lists, queues and hash maps. Features slot reservation, vehicle tracking and usage reporting with a full OOP architecture.</div>
+          <div class="proj-tags"><span class="proj-tag">C++</span><span class="proj-tag">OOP</span><span class="proj-tag">Data Structures</span></div>
+        </a>
+        <a href="#projects" class="project-row">
+          <div class="proj-num">002</div>
+          <div class="proj-name">VR Logic Gate Puzzle</div>
+          <div class="proj-desc">An immersive logic gate puzzle level built in Roblox Studio. Players interact with AND, OR and NOT gates using ProximityPrompts to unlock doors — designed as an educational game experience.</div>
+          <div class="proj-tags"><span class="proj-tag">Roblox Studio</span><span class="proj-tag">Lua</span><span class="proj-tag">Game Design</span></div>
+        </a>
+        <a href="#projects" class="project-row">
+          <div class="proj-num">003</div>
+          <div class="proj-name">Cyberpunk Portfolio Website</div>
+          <div class="proj-desc">First web development project — a personal portfolio with a cyberpunk-maple aesthetic. White editorial layout, Shippori Mincho typography, falling leaf animations and a custom crimson cursor.</div>
+          <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">UI Design</span></div>
+        </a>
+        <a href="#projects" class="project-row">
+          <div class="proj-num">004</div>
+          <div class="proj-name">The Art of Doing Less</div>
+          <div class="proj-desc">Academic article examining the slow productivity movement and the empirical case for a 4-day work week — covering deep work theory, cognitive output research and modern workplace policy.</div>
+          <div class="proj-tags"><span class="proj-tag">Research</span><span class="proj-tag">Academic Writing</span><span class="proj-tag">Productivity</span></div>
+        </a>
+        <a href="#projects" class="project-row">
+          <div class="proj-num">005</div>
+          <div class="proj-name">Emotion Recognition Face Reader</div>
+          <div class="proj-desc">Long-term dream project conceived in 2022 — an application that reads and interprets human emotions from facial expressions in real time. Currently in early research and scoping phase.</div>
+          <div class="proj-tags"><span class="proj-tag">Computer Vision</span><span class="proj-tag">Python</span><span class="proj-tag">ML</span><span class="proj-tag">In Progress</span></div>
+        </a>
+        <a href="#projects" class="project-row">
+          <div class="proj-num">006</div>
+          <div class="proj-name">Astralis: Echoes of the Rift</div>
+          <div class="proj-desc">Ambitious first game development project — a semi-open world action RPG in early concept stage. Draws inspiration from Punishing: Gray Raven and Cyberpunk: Edgerunners in tone and world design.</div>
+          <div class="proj-tags"><span class="proj-tag">Game Dev</span><span class="proj-tag">C#</span><span class="proj-tag">World Design</span><span class="proj-tag">Concept</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="sw" style="position:relative;z-index:2">
+      <div class="sec-meta reveal">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Achieve<em>ments</em></h2>
+      </div>
+      <div class="ach-grid reveal">
+        <div class="ach-item">
+          <div class="ach-year">2025</div>
+          <div class="ach-title">KAIST Exchange Acceptance</div>
+          <div class="ach-detail">Accepted to the Student Exchange Programme at Korea Advanced Institute of Science and Technology (KAIST) — one of Asia's leading science and technology universities. Pending financial arrangements.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-year">2023–2025</div>
+          <div class="ach-title">Project Director &amp; HOD, Rotaract UTP</div>
+          <div class="ach-detail">Served multiple roles across two years at RACUTP — Project Director, Head of Department (HOD), Assistant HOD, emcee and media/PR lead across large-scale campus events.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-year">2025</div>
+          <div class="ach-title">Published Academic Article</div>
+          <div class="ach-detail">"The Art of Doing Less" — an academic study on slow productivity theory and the empirical case for a 4-day work week, examining cognitive output and modern workplace design.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-year">2024</div>
+          <div class="ach-title">JBL Campaign Winner</div>
+          <div class="ach-detail">Selected as campaign winner and received a JBL Tune 730BT wireless headphone — one of JBL's premium active noise-cancelling over-ear models.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-year">2023–2025</div>
+          <div class="ach-title">Rotaract UTP — Emcee &amp; Media Lead</div>
+          <div class="ach-detail">Hosted and emceed multiple UTP events while simultaneously heading media production, social media strategy and PR communications for Rotaract club events.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-year">Ongoing</div>
+          <div class="ach-title">Multilingual Pursuit — Japanese &amp; Chinese</div>
+          <div class="ach-detail">Currently enrolled in LFB2082 Japanese Communication at UTP and independently pursuing Mandarin Chinese toward full proficiency — speaking, listening, reading, writing, grammar and vocabulary.</div>
+        </div>
+      </div>
+    </div>
+    <svg class="ach-maple" viewBox="0 0 200 220" fill="none" aria-hidden="true">
+      <path d="M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z" fill="#8b1a1a"/>
+      <rect x="95" y="133" width="10" height="55" rx="3" fill="#6b1010"/>
+    </svg>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">05</span>
+        <h2 class="sec-title">Beyond <em>Code</em></h2>
+      </div>
+    </div>
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item"><span class="mdot"></span>Anime</span>
+        <span class="marquee-item"><span class="mdot"></span>Action RPGs</span>
+        <span class="marquee-item"><span class="mdot"></span>Writing</span>
+        <span class="marquee-item"><span class="mdot"></span>Stock Trading</span>
+        <span class="marquee-item"><span class="mdot"></span>Cinema</span>
+        <span class="marquee-item"><span class="mdot"></span>Cooking</span>
+        <span class="marquee-item"><span class="mdot"></span>Languages</span>
+        <span class="marquee-item"><span class="mdot"></span>Music</span>
+        <span class="marquee-item"><span class="mdot"></span>Tech</span>
+        <span class="marquee-item"><span class="mdot"></span>Anime</span>
+        <span class="marquee-item"><span class="mdot"></span>Action RPGs</span>
+        <span class="marquee-item"><span class="mdot"></span>Writing</span>
+        <span class="marquee-item"><span class="mdot"></span>Stock Trading</span>
+        <span class="marquee-item"><span class="mdot"></span>Cinema</span>
+        <span class="marquee-item"><span class="mdot"></span>Cooking</span>
+        <span class="marquee-item"><span class="mdot"></span>Languages</span>
+        <span class="marquee-item"><span class="mdot"></span>Music</span>
+        <span class="marquee-item"><span class="mdot"></span>Tech</span>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="hobby-cards reveal">
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🎌</span>
+          <div class="hobby-name">Anime</div>
+          <div class="hobby-note">Cyberpunk: Edgerunners is at the top. Drawn to series that blend raw emotion with stunning visual direction — sci-fi, psychological and action genres.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🎮</span>
+          <div class="hobby-name">Action RPGs</div>
+          <div class="hobby-note">Currently playing Arknights: Endfield and Punishing: Gray Raven. Drawn to complex combat systems, deep lore and high production value in mobile gaming.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">✍️</span>
+          <div class="hobby-name">Writing</div>
+          <div class="hobby-note">From academic articles to casual reflections. Writing is how ideas get stress-tested — the moment something is written down, gaps become visible.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">📈</span>
+          <div class="hobby-name">Stock Trading</div>
+          <div class="hobby-note">Active on Moomoo. Treat markets as a system — reading technicals, sentiment and macros. Started investing as a student to build financial literacy early.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🎬</span>
+          <div class="hobby-name">Cinema</div>
+          <div class="hobby-note">Comedy films on Netflix and Indian cinema — particularly appreciates storytelling with cultural depth, wit and strong ensemble casts.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🍳</span>
+          <div class="hobby-name">Cooking</div>
+          <div class="hobby-note">Hostel kitchen experiments with a Vigico air fryer. Cooking is a creative outlet — improvising with limited ingredients teaches you to work within constraints.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🌐</span>
+          <div class="hobby-name">Languages</div>
+          <div class="hobby-note">Studying Japanese (LFB2082 at UTP) and Mandarin Chinese independently. Targeting full proficiency in both — speaking, listening, reading and writing.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">🎧</span>
+          <div class="hobby-name">Music</div>
+          <div class="hobby-note">Listening sessions on the JBL Tune 730BT. Soundtrack-heavy taste — game OSTs, anime scores and anything cinematic that pairs well with late-night coding.</div>
+        </div>
+        <div class="hobby-card">
+          <span class="hobby-icon" aria-hidden="true">💻</span>
+          <div class="hobby-name">PC &amp; Tech</div>
+          <div class="hobby-note">Daily driver: Acer Predator Helios Neo 16 connected to a Sharp TV with built-in Google TV. Has experimented with dual-booting Pop!_OS alongside Windows.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">06</span>
+        <h2 class="sec-title">Blog &amp; <em>Writing</em></h2>
+      </div>
+      <div class="blog-grid reveal">
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Academic · 2025</div>
+          <div class="blog-title">The Art of Doing Less</div>
+          <p class="blog-excerpt">An academic study on slow productivity — why doing less, more intentionally, leads to higher quality output. Covers the empirical research behind 4-day work weeks and deep work theory.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Tech · 2025</div>
+          <div class="blog-title">Building a Smart Parking System in C++</div>
+          <p class="blog-excerpt">A walkthrough of the data structures, OOP design and allocation logic behind the project — what worked, what I'd refactor and what I learned about real-world system design.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Design · 2025</div>
+          <div class="blog-title">Cyberpunk Meets Maple: My Portfolio Design Process</div>
+          <p class="blog-excerpt">How I blended two opposing aesthetics — industrial cyberpunk and quiet autumn nature — into a single cohesive site. Inspired by lilasikuta.jp's editorial minimalism.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Language · 2025</div>
+          <div class="blog-title">Learning Japanese and Chinese at the Same Time</div>
+          <p class="blog-excerpt">My experience studying both Japanese (LFB2082 at UTP) and Mandarin Chinese simultaneously — strategies, overlaps, challenges and the goal of reaching full proficiency in both.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Gaming · 2025</div>
+          <div class="blog-title">What Cyberpunk: Edgerunners Taught Me About Storytelling</div>
+          <p class="blog-excerpt">A reflection on why Edgerunners hit differently — the raw emotional pacing, the visual language of neon and decay, and what it means to tell a story with no safety net.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+        <a href="#blog" class="blog-card">
+          <div class="blog-cat">Finance · 2025</div>
+          <div class="blog-title">Reading Markets as a Student: My Moomoo Experience</div>
+          <p class="blog-excerpt">How I started stock trading while in university — using Moomoo, reading charts, managing small positions and learning to treat markets like systems rather than gambling tables.</p>
+          <span class="blog-read">Read →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="sw">
+      <div class="sec-meta reveal">
+        <span class="sec-num">07</span>
+        <h2 class="sec-title">Résumé &amp; <em>CV</em></h2>
+      </div>
+      <div class="resume-inner reveal">
+        <div class="resume-visual" aria-hidden="true">
+          <div class="rv h"></div><div class="rv s"></div><div class="rv x"></div>
+          <div class="rv sp"></div>
+          <div class="rv h"></div><div class="rv l"></div><div class="rv m"></div><div class="rv s"></div>
+          <div class="rv sp"></div>
+          <div class="rv h"></div><div class="rv x"></div><div class="rv m"></div><div class="rv l"></div>
+          <svg class="rv-leaf" viewBox="0 0 200 220" fill="none" aria-hidden="true">
+            <path d="M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z" fill="#8b1a1a"/>
+            <rect x="95" y="133" width="10" height="55" rx="3" fill="#6b1010"/>
+          </svg>
+        </div>
+        <div class="resume-info">
+          <h3>Download or preview the full résumé and CV</h3>
+          <p>A comprehensive overview of academic background, technical skills, project work, leadership roles and extracurricular involvement.</p>
+          <div class="resume-btns">
+            <a href="#" class="btn-text" style="width:fit-content">Download PDF</a>
+            <a href="#" class="btn-ghost" style="width:fit-content">View Online</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sw">
+      <div class="contact-wrap">
+        <div class="contact-left reveal">
+          <div class="sec-meta inv">
+            <span class="sec-num inv">08</span>
+            <h2 class="sec-title inv">Let's <em>Connect</em></h2>
+          </div>
+          <p class="contact-tagline">Open to internship opportunities, collaborations and good conversations.</p>
+          <div class="contact-links-list">
+            <a href="https://github.com/Kheshwen" class="contact-link-row" target="_blank" rel="noopener noreferrer">GitHub <span class="larr" aria-hidden="true">→</span></a>
+            <a href="https://linkedin.com/in/kheshwenda" class="contact-link-row" target="_blank" rel="noopener noreferrer">LinkedIn <span class="larr" aria-hidden="true">→</span></a>
+            <a href="mailto:khesh555@gmail.com" class="contact-link-row">Email <span class="larr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div>
+            <label class="field-label" for="userName">Name</label>
+            <input id="userName" name="name" class="field-input" type="text" placeholder="Your name" required/>
+          </div>
+          <div>
+            <label class="field-label" for="userEmail">Email</label>
+            <input id="userEmail" name="email" class="field-input" type="email" placeholder="your@email.com" required/>
+          </div>
+          <div>
+            <label class="field-label" for="userMessage">Message</label>
+            <textarea id="userMessage" name="message" class="field-textarea" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+    <svg class="contact-leaf-bg" viewBox="0 0 200 220" fill="none" aria-hidden="true">
+      <path d="M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z" fill="white"/>
+      <rect x="95" y="133" width="10" height="55" rx="3" fill="white"/>
+    </svg>
+  </section>
+
+  <footer>
+    <span>Kheshwenda Narasimban</span>
+    <span>© 2025 · All rights reserved</span>
+  </footer>
+
+  <script>
+    // Custom cursor — only activates if JS loads successfully
+    document.body.classList.add('js-cursor');
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function loop() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.2)';
+        ring.style.width  = '48px';
+        ring.style.height = '48px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.width  = '32px';
+        ring.style.height = '32px';
+      });
+    });
+
+    // Nav border on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (i * 0.07) + 's';
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Falling maple leaves
+    const lc   = document.getElementById('leaves');
+    const lp   = "M100 8 L108 32 L128 22 L118 46 L145 42 L132 62 L158 68 L138 80 L155 100 L132 96 L138 120 L118 108 L112 135 L100 118 L88 135 L82 108 L62 120 L68 96 L45 100 L62 80 L42 68 L68 62 L55 42 L82 46 L72 22 L92 32 Z";
+    const cols = ['#8b1a1a', '#b84a1a', '#c47a1a', '#9b2020', '#7a1515'];
+
+    function mkLeaf() {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const sz  = 16 + Math.random() * 20;
+      svg.setAttribute('viewBox', '0 0 200 220');
+      svg.setAttribute('width',  sz);
+      svg.setAttribute('height', sz);
+      svg.setAttribute('aria-hidden', 'true');
+      svg.style.cssText = `position:absolute;left:${Math.random() * 100}vw;top:-60px;pointer-events:none;`;
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d',    lp);
+      p.setAttribute('fill', cols[Math.floor(Math.random() * cols.length)]);
+      svg.appendChild(p);
+      svg.classList.add('leaf-fall');
+      const dur = 9  + Math.random() * 10;
+      const del = Math.random() * 12;
+      svg.style.animationDuration = dur + 's';
+      svg.style.animationDelay    = del + 's';
+      lc.appendChild(svg);
+      setTimeout(() => svg.remove(), (dur + del) * 1000);
+    }
+
+    setInterval(mkLeaf, 1600);
+    for (let i = 0; i < 6; i++) setTimeout(mkLeaf, i * 300);
+  </script>
+</body>
+</html>
